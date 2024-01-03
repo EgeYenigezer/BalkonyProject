@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalkonyDAL", "BalkonyDAL\Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalkonyBusiness", "BalkonyBusiness\BalkonyBusiness.csproj", "{34ACABF0-35B4-4ABA-93ED-01881EA375ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalkonyApi", "BalkonyApi\BalkonyApi.csproj", "{1BC658DF-95CA-4EB6-A7A2-A4BE9A105330}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{34ACABF0-35B4-4ABA-93ED-01881EA375ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34ACABF0-35B4-4ABA-93ED-01881EA375ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34ACABF0-35B4-4ABA-93ED-01881EA375ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC658DF-95CA-4EB6-A7A2-A4BE9A105330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC658DF-95CA-4EB6-A7A2-A4BE9A105330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC658DF-95CA-4EB6-A7A2-A4BE9A105330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC658DF-95CA-4EB6-A7A2-A4BE9A105330}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
