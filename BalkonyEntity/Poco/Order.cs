@@ -11,5 +11,6 @@ namespace BalkonyEntity.Poco
     {
         public string Title { get; set; }
         public double Cost { get; set; }
+        public Customer Customer { get; set; }
     }
 }
