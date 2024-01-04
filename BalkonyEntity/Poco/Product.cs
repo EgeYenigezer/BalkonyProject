@@ -14,5 +14,9 @@ namespace BalkonyEntity.Poco
         public string Description { get; set; }
         public Stock Stock { get; set; }
         public Int64 StockId { get; set; }
+        public Supplier Supplier { get; set; }
+        public Int64 SupplierId { get; set; }
+
+
     }
 }

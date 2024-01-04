@@ -11,7 +11,9 @@ namespace BalkonyEntity.Poco
     {
         public string Name { get; set; }
         public string Phone { get; set; }
-        public string Address { get; set; } 
+        public string Address { get; set; }
+        public User User { get; set; }
+        public Int64 UserId { get; set; }
 
     }
 }
