@@ -1,24 +1,15 @@
 ﻿using BalkonyEntity.Poco.Base;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BalkonyEntity.Poco
+namespace BalkonyEntity.Poco;
+
+public partial class Supplier:BaseEntity
 {
-    public class Supplier:BaseEntity
-    {
-        public Supplier()
-        {
-            Products = new List<Product>();
-        }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public User User { get; set; }
-        public Int64 UserId { get; set; }
-        public IEnumerable<Product> Products { get; set; }
-
-    }
+    public long UserId { get; set; }
+    public string? Name { get; set; }
+    public string? Phone { get; set; }
+    public string? Address { get; set; }
+    public virtual ICollection<StockDetail> StockDetails { get; set; } = new List<StockDetail>();
+    public virtual User User { get; set; } = null!;
 }
