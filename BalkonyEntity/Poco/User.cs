@@ -15,6 +15,9 @@ namespace BalkonyEntity.Poco
         public string UserName { get; set; }
         public string Password { get; set; }
         public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<Supplier> Suppliers { get; set; }
+        public IEnumerable<Stock> Stocks { get; set; }
+        public IEnumerable<Customer> Customers { get; set; }
 
     }
 }

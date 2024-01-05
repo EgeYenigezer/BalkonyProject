@@ -9,5 +9,7 @@ namespace BalkonyEntity.Poco
 {
     public class Balcony:BaseEntity
     {
+        
+
     }
 }

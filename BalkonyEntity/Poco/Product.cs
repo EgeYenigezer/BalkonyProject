@@ -9,13 +9,17 @@ namespace BalkonyEntity.Poco
 {
     public class Product:BaseEntity
     {
+        public Product()
+        {
+            Stocks = new List<Stock>();
+        }
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
-        public Stock Stock { get; set; }
-        public Int64 StockId { get; set; }
         public Supplier Supplier { get; set; }
         public Int64 SupplierId { get; set; }
+        public IEnumerable<Stock> Stocks { get; set; }
+        
 
 
     }
