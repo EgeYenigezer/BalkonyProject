@@ -11,4 +11,19 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BalkonyBusiness\BalkonyBusiness.csproj" />
+    <ProjectReference Include="..\BalkonyDAL\BalkonyDAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Mapper\CustomerMap\" />
+    <Folder Include="Mapper\UserMap\" />
+    <Folder Include="Mapper\SupplierMap\" />
+    <Folder Include="Mapper\StockDetailMap\" />
+    <Folder Include="Mapper\StockMap\" />
+    <Folder Include="Mapper\ProductMap\" />
+    <Folder Include="Mapper\OrderMap\" />
+  </ItemGroup>
+
 </Project>

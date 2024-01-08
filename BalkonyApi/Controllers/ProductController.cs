@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BalkonyBusiness.Abstract;
+using BalkonyEntity.Poco;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BalkonyApi.Controllers
 {
@@ -6,9 +8,16 @@ namespace BalkonyApi.Controllers
     [Route("[Action]")]
     public class ProductController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductService _productService;
+
+        public ProductController(IProductService productService)
         {
-            return View();
+            _productService = productService;
+        }
+
+        public async Task<IActionResult> AddProduct(Product product)
+        {
+            return Ok(product);
         }
     }
 }
