@@ -1,5 +1,7 @@
 ﻿using BalkonyDAL.Abstract.DataManagement;
+using BalkonyDAL.Concrete.EntityFramework.Context;
 using BalkonyEntity.Poco.Base;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -12,29 +14,61 @@ namespace BalkonyDAL.Concrete.EntityFramework.DataManagement
 {
     public class EfRepository<T> : IRepository<T> where T : BaseEntity
     {
-        public Task<EntityEntry<T>> AddAsync(T Entity)
+        private readonly DbContext _context;
+        private readonly DbSet<T> _dbSet;
+
+        public EfRepository(DbSet<T> dbSet, DbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _dbSet = _context.Set<T>();
+            
         }
 
-        public Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Filter = null, params string[] IncludeProperties)
+        public async Task<EntityEntry<T>> AddAsync(T Entity)
         {
-            throw new NotImplementedException();
+            return await _dbSet.AddAsync(Entity);
         }
 
-        public Task<T> GetAsync(Expression<Func<T, bool>> Filter, params string[] IncludeProperties)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Filter = null, params string[] IncludeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _dbSet;
+
+            if (Filter!=null)
+            {
+                query = query.Where(Filter);
+
+            }
+            if (IncludeProperties.Length>0)
+            {
+                foreach (var property in IncludeProperties)
+                {
+                    query=query.Include(property);
+                }
+            }
+            return await Task.Run(() => query);
         }
 
-        public Task RemoveAsync(T Entity)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> Filter, params string[] IncludeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _dbSet;
+            if (IncludeProperties.Length>0)
+            {
+                foreach (var property in IncludeProperties)
+                {
+                    query = query.Include(property);
+                }
+            }
+            return await query.SingleOrDefaultAsync(Filter);
         }
 
-        public Task UpdateAsync(T Entity)
+        public async Task RemoveAsync(T Entity)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => _dbSet.Remove(Entity));
+        }
+
+        public async Task UpdateAsync(T Entity)
+        {
+            await Task.Run(() => _dbSet.Update(Entity));
         }
     }
 }
