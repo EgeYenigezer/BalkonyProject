@@ -4,6 +4,7 @@ using BalkonyEntity.DTO.Product;
 using BalkonyEntity.Poco;
 using BalkonyEntity.Result;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace BalkonyApi.Controllers
 {
@@ -30,6 +31,23 @@ namespace BalkonyApi.Controllers
             ProductDTOResponse productDTOResponse = _mapper.Map<ProductDTOResponse>(product);
 
             return Ok(ApiResult<ProductDTOResponse>.SuccesWithData(productDTOResponse));
+        }
+
+        [HttpGet("/Products")]
+        public async Task<IActionResult> Products()
+        {
+            var Products = await _productService.GetAllAsync();
+
+
+            List<ProductDTOResponse> productDTOResponses = new();
+            foreach (var product in Products)
+            {
+                productDTOResponses.Add(_mapper.Map<ProductDTOResponse>(product));
+            }
+
+            return Ok(ApiResult<List<ProductDTOResponse>>.SuccesWithData(productDTOResponses));
+
+
         }
     }
 }
