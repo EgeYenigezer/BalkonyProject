@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BalkonyDAL\BalkonyDAL.csproj" />
     <ProjectReference Include="..\BalkonyEntity\BalkonyEntity.csproj" />
   </ItemGroup>
 
