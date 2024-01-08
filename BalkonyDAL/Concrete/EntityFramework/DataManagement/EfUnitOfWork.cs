@@ -54,7 +54,7 @@ namespace BalkonyDAL.Concrete.EntityFramework.DataManagement
                 {
                     item.Entity.AddedTime = DateTime.Now;
                     item.Entity.UpdatedTime = DateTime.Now;
-                    if (item.Entity.IsActive==null)
+                    if (item.Entity.IsActive==false)
                     {
                         item.Entity.IsActive = true;
                     }

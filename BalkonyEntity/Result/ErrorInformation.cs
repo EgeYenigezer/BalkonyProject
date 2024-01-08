@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BalkonyEntity.DTO.StockDetail
+namespace BalkonyEntity.Result
 {
-    public class StockDetailDTORequest:StockDetailDTOBase
+    public class ErrorInformation
     {
     }
 }

@@ -8,5 +8,9 @@ namespace BalkonyEntity.DTO.Order
 {
     public class OrderDTOBase
     {
+        public long UserId { get; set; }
+        public long CustomerId { get; set; }
+        public string? Title { get; set; }
+        public decimal? Cost { get; set; }
     }
 }

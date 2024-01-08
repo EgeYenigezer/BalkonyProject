@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<BalconyDbContext>();
 builder.Services.AddScoped<IUnitOfWork,EfUnitOfWork >();
 builder.Services.AddScoped<ICustomerService,CustomerManager >();
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IStockService,StockManager >();
 builder.Services.AddScoped<IStockDetailService,StockDetailManager >();
 builder.Services.AddScoped<ISupplierService,SupplierManager >();
 builder.Services.AddScoped<IUserService,UserManager >();
+
 
 
 var app = builder.Build();

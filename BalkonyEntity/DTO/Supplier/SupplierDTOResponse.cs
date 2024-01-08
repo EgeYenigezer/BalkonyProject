@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BalkonyEntity.DTO.Supplier
 {
-    public class SupplierDTOResponse
+    public class SupplierDTOResponse: SupplierDTOBase
     {
     }
 }

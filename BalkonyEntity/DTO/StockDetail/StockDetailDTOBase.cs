@@ -8,5 +8,9 @@ namespace BalkonyEntity.DTO.StockDetail
 {
     public class StockDetailDTOBase
     {
+        public long SupplierId { get; set; }
+        public long StockId { get; set; }
+        public long ProductId { get; set; }
+        public string? Description { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BalkonyEntity.DTO.User
 {
-    public class UserDTORequest
+    public class UserDTORequest:UserDTOBase
     {
     }
 }

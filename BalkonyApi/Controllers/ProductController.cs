@@ -1,5 +1,8 @@
-﻿using BalkonyBusiness.Abstract;
+﻿using AutoMapper;
+using BalkonyBusiness.Abstract;
+using BalkonyEntity.DTO.Product;
 using BalkonyEntity.Poco;
+using BalkonyEntity.Result;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BalkonyApi.Controllers
@@ -9,15 +12,24 @@ namespace BalkonyApi.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
-        public async Task<IActionResult> AddProduct(Product product)
+        [HttpPost("/AddProduct")]
+        public async Task<IActionResult> AddProduct(ProductDTORequest productDTORequest)
         {
-            return Ok(product);
+            Product product = _mapper.Map<Product>(productDTORequest);
+
+            await _productService.AddAsync(product);
+
+            ProductDTOResponse productDTOResponse = _mapper.Map<ProductDTOResponse>(product);
+
+            return Ok(ApiResult<ProductDTOResponse>.SuccesWithData(productDTOResponse));
         }
     }
 }

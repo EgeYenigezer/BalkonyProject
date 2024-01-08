@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BalkonyEntity.DTO.Order
 {
-    public class OrderDTORequest
+    public class OrderDTORequest:OrderDTOBase
     {
     }
 }
