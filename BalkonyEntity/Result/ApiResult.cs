@@ -36,7 +36,7 @@ namespace BalkonyEntity.Result
         public T Data { get; set; }
         public int StatusCode { get; set; }
         public string Message { get; set; }
-        public ErrorInformation ErrorInformation { get; set; }  
+        public ErrorInformation? ErrorInformation { get; set; }  
 
         public static ApiResult<T> SuccesWithData(T data, string message="İşlem Başarılı",int statusCode=(int)HttpStatusCode.OK)
         {
