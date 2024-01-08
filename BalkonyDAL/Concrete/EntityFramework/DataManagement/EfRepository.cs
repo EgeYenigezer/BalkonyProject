@@ -17,7 +17,7 @@ namespace BalkonyDAL.Concrete.EntityFramework.DataManagement
         private readonly DbContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public EfRepository(DbSet<T> dbSet, DbContext context)
+        public EfRepository(DbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
