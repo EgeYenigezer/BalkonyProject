@@ -23,6 +23,13 @@ namespace BalkonyEntity.Result
             this.StatusCode = _statusCode;
             
         }
+        public ApiResult(string _message, int _statusCode)
+        {
+            
+            this.Message = _message;
+            this.StatusCode = _statusCode;
+            
+        }
 
 
 
@@ -34,6 +41,10 @@ namespace BalkonyEntity.Result
         public static ApiResult<T> SuccesWithData(T data, string message="İşlem Başarılı",int statusCode=(int)HttpStatusCode.OK)
         {
             return new ApiResult<T>(data,message,statusCode);
+        }
+        public static ApiResult<T> SuccesWithOutData(string message="İşlem Başarılı",int statusCode=(int)HttpStatusCode.OK)
+        {
+            return new ApiResult<T>(message, statusCode);
         }
 
     }
