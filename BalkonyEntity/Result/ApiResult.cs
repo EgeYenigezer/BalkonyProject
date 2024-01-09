@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,10 +54,28 @@ namespace BalkonyEntity.Result
         {
             return new ApiResult<T>(message, statusCode);
         }
+        public static ApiResult<T> SuccesNoDataFound(string message = "Sonuç bulunamadı!",int statusCode=(int)HttpStatusCode.NotFound)  
+        { 
+            return new ApiResult<T> (message,statusCode,ErrorInformation.NotFound());
+        }
         public static ApiResult<T> FieldValdationError(List<string>? errorMessages=null,string message="Hata Oluştu",int statusCode=(int)HttpStatusCode.BadRequest)
         {
-            return new ApiResult<T>(message,statusCode,ErrorInformation.FieldValidationError());
+            return new ApiResult<T>(message,statusCode,ErrorInformation.FieldValidationError(errorMessages));
         }
 
+        public static ApiResult<T> AuthenticationError(string message,int statusCode = (int)HttpStatusCode.NotFound)
+        {
+            return new ApiResult<T>(message,statusCode,ErrorInformation.AuthenticationError());
+        }
+
+        public static ApiResult<T> TokenError(string message,int statusCode = (int)HttpStatusCode.Unauthorized)
+        {
+            return new ApiResult<T>(message, statusCode, ErrorInformation.TokenError());
+        }
+
+        public static ApiResult<T> TokenNotFoundError(string message,int statusCode = (int)HttpStatusCode.Unauthorized)
+        {
+            return new ApiResult<T>(message,statusCode,ErrorInformation.TokenNotFoundError());
+        }
     }
 }
