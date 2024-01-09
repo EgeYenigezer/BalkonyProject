@@ -33,6 +33,29 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<UserDTOResponse>.SuccesWithData(userDTOResponse));
         }
 
+        [HttpPost("/UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UserDTORequest userDTORequest)
+        {
+            User user =_mapper.Map<User>(userDTORequest);
+
+            await _userService.UpdateAsync(user);
+
+            return Ok(ApiResult<UserDTOResponse>.SuccesWithOutData());
+        }
+
+
+        [HttpDelete("/DeleteUser")]
+        public async Task<IActionResult> DeleteUser(Int64 userId)
+        {
+            User user = await _userService.GetAsync(x=>x.Id==userId);
+
+            await _userService.DeleteAsync(user);
+
+            return Ok(ApiResult<UserDTOResponse>.SuccesWithOutData());
+        }
+
+
+
         [HttpGet("/Users")]
         public async Task<IActionResult> Users()
         {
@@ -49,6 +72,17 @@ namespace BalkonyApi.Controllers
             }
 
             return Ok(ApiResult<List<UserDTOResponse>>.SuccesWithData(userDTOResponses));
+        }
+
+        [HttpGet("/GetUser/{id}")]
+        public async Task<IActionResult> GetUser(Int64 userId)
+        {
+            User user = await _userService.GetAsync(x => x.Id==userId);
+
+            UserDTOResponse userDTOResponse = _mapper.Map<UserDTOResponse>(user);
+            
+
+            return Ok(ApiResult<UserDTOResponse>.SuccesWithData(userDTOResponse));
         }
 
     }
