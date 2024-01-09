@@ -30,6 +30,13 @@ namespace BalkonyEntity.Result
             this.StatusCode = _statusCode;
             
         }
+        public ApiResult( string _message, int _statusCode, ErrorInformation _errorInformation)
+        {
+            
+            this.Message = _message;
+            this.StatusCode = _statusCode;
+            this.ErrorInformation = _errorInformation;
+        }
 
 
 
@@ -45,6 +52,10 @@ namespace BalkonyEntity.Result
         public static ApiResult<T> SuccesWithOutData(string message="İşlem Başarılı",int statusCode=(int)HttpStatusCode.OK)
         {
             return new ApiResult<T>(message, statusCode);
+        }
+        public static ApiResult<T> FieldValdationError(List<string>? errorMessages=null,string message="Hata Oluştu",int statusCode=(int)HttpStatusCode.BadRequest)
+        {
+            return new ApiResult<T>(message,statusCode,ErrorInformation.FieldValidationError());
         }
 
     }
