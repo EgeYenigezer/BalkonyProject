@@ -36,7 +36,10 @@ namespace BalkonyApi.Controllers
         [HttpPost("/UpdateUser")]
         public async Task<IActionResult> UpdateUser(UserDTORequest userDTORequest)
         {
-            User user =_mapper.Map<User>(userDTORequest);
+            User user = await _userService.GetAsync(x => x.Id == userDTORequest.Id);
+                
+
+            user = _mapper.Map(userDTORequest, user);
 
             await _userService.UpdateAsync(user);
 

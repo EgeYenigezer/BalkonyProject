@@ -8,5 +8,6 @@ namespace BalkonyEntity.DTO.User
 {
     public class UserDTORequest:UserDTOBase
     {
+        public Int64 Id { get; set; }
     }
 }

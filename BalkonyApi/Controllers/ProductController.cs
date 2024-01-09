@@ -33,6 +33,8 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<ProductDTOResponse>.SuccesWithData(productDTOResponse));
         }
 
+
+
         [HttpGet("/Products")]
         public async Task<IActionResult> Products()
         {
