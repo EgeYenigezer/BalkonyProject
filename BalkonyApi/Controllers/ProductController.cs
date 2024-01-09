@@ -33,6 +33,28 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<ProductDTOResponse>.SuccesWithData(productDTOResponse));
         }
 
+        [HttpPost("/UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct(ProductDTORequest productDTORequest)
+        {
+            var product = await _productService.GetAsync(x => x.Id == productDTORequest.Id);
+
+            product = _mapper.Map(productDTORequest, product);
+
+            await _productService.UpdateAsync(product);
+
+            return Ok(ApiResult<ProductDTOResponse>.SuccesWithOutData());
+        }
+
+        [HttpDelete("/DeleteProduct/{productId}")]
+        public async Task<IActionResult> DeleteProduct(long productId)
+        {
+            var product = await _productService.GetAsync(x=>x.Id==productId);
+            
+            await _productService.DeleteAsync(product);
+
+            return Ok(ApiResult<ProductDTOResponse>.SuccesWithOutData());
+        }
+
 
 
         [HttpGet("/Products")]
