@@ -8,5 +8,7 @@ namespace BalkonyEntity.DTO.Customer
 {
     public class CustomerDTORequest:CustomerDTOBase
     {
+        public long UserId { get; set; }
+        public long Id { get; set; }
     }
 }
