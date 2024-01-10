@@ -47,7 +47,7 @@ namespace BalkonyApi.Controllers
         }
 
 
-        [HttpDelete("/DeleteUser")]
+        [HttpDelete("/DeleteUser/{userId}")]
         public async Task<IActionResult> DeleteUser(Int64 userId)
         {
             User user = await _userService.GetAsync(x=>x.Id==userId);
@@ -77,7 +77,7 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<List<UserDTOResponse>>.SuccesWithData(userDTOResponses));
         }
 
-        [HttpGet("/GetUser/{id}")]
+        [HttpGet("/GetUser/{userId}")]
         public async Task<IActionResult> GetUser(Int64 userId)
         {
             User user = await _userService.GetAsync(x => x.Id==userId);

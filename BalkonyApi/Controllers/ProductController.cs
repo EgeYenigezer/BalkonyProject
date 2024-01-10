@@ -78,7 +78,7 @@ namespace BalkonyApi.Controllers
         public async Task<IActionResult> GetProduct(long productId)
         {
 
-            ProductDTOResponse productDTOResponse = _mapper.Map<ProductDTOResponse>(await _productService.GetAsync(x => x.Id == productId));""
+            ProductDTOResponse productDTOResponse = _mapper.Map<ProductDTOResponse>(await _productService.GetAsync(x => x.Id == productId));
 
 
             return Ok(ApiResult<ProductDTOResponse>.SuccesWithData(productDTOResponse));
