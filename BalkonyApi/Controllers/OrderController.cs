@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BalkonyBusiness.Abstract;
+using BalkonyEntity.DTO.Order;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 
@@ -18,9 +19,20 @@ namespace BalkonyApi.Controllers
             _orderService = orderService;
         }
 
-        public async Task<IActionResult> AddOrder()
+        [HttpPost("/AddOrder")]
+        public async Task<IActionResult> AddOrder(OrderDTORequest orderDTORequest)
         {
+
             return Ok();
         }
+
+        [HttpPost("/UpdateOrder")]
+        public async Task<IActionResult> UpdateOrder(OrderDTORequest orderDTORequest)
+        {
+
+            return Ok();
+        }
+
+        
     }
 }
