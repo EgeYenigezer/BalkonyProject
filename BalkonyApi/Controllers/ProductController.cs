@@ -48,8 +48,8 @@ namespace BalkonyApi.Controllers
         [HttpDelete("/DeleteProduct/{productId}")]
         public async Task<IActionResult> DeleteProduct(long productId)
         {
-            var product = await _productService.GetAsync(x=>x.Id==productId);
-            
+            var product = await _productService.GetAsync(x => x.Id == productId);
+
             await _productService.DeleteAsync(product);
 
             return Ok(ApiResult<ProductDTOResponse>.SuccesWithOutData());
@@ -72,6 +72,16 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<List<ProductDTOResponse>>.SuccesWithData(productDTOResponses));
 
 
+        }
+
+        [HttpGet("/GetProduct/{productId}")]
+        public async Task<IActionResult> GetProduct(long productId)
+        {
+
+            ProductDTOResponse productDTOResponse = _mapper.Map<ProductDTOResponse>(await _productService.GetAsync(x => x.Id == productId));""
+
+
+            return Ok(ApiResult<ProductDTOResponse>.SuccesWithData(productDTOResponse));
         }
     }
 }
