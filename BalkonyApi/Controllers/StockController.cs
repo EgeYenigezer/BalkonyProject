@@ -51,7 +51,7 @@ namespace BalkonyApi.Controllers
         [HttpGet("/Stocks/{userId}")]
         public async Task<IActionResult> GetAllStock(long userId)
         {
-            var stocks = await _stockService.GetAllAsync(x=>x.UserId==userId);
+            var stocks = await _stockService.GetAllAsync(x=>x.UserId==userId,"Product");
             List<StockDTOResponse> stockDTOResponses = new();
             foreach (var stock in stocks)
             {
