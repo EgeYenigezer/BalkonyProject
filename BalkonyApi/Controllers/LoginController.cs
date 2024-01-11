@@ -24,17 +24,43 @@ namespace BalkonyApi.Controllers
             _userService = userService;
         }
 
-        [HttpGet("/Login")]
+        [HttpPost("/Login")]
         public async Task<IActionResult> Login(LoginDTORequest loginDTORequest)
         {
             var user = await _userService.GetAsync(x=>x.Email==loginDTORequest.Email&x.Password==loginDTORequest.Password);
 
             if (user==null)
             {
-                return NotFound(ApiResult<LoginDTORequest>.AuthenticationError);
+                
+                return NotFound(ApiResult<LoginDTORequest>.AuthenticationError("Kullanıcı Adı veya Şifre yanlış!!"));
+            }
+            else
+            {
+                var key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("AppSettings:JWTKey"));
+
+                var claims = new List<Claim>();
+                claims.Add(new Claim("UserName", user.Name));
+                claims.Add(new Claim("Password", user.Password));
+
+                var jwt = new JwtSecurityToken(
+                    
+                    expires:DateTime.Now.AddDays(1),
+                    claims:claims,
+                    issuer:"http://egeyenigezer.com",
+                    signingCredentials:new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature)
+                    );
+                var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                LoginDTOResponse loginDTOResponse = new();
+
+                loginDTOResponse.Id = user.Id;
+                loginDTOResponse.Name=user.Name;
+                loginDTOResponse.Token = token;
+
+                return Ok(ApiResult<LoginDTOResponse>.SuccesWithData(loginDTOResponse));
             }
 
-            return Ok();
+            
         }
         
     }
