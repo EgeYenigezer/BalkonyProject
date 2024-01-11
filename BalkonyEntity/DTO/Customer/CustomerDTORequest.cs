@@ -8,6 +8,6 @@ namespace BalkonyEntity.DTO.Customer
 {
     public class CustomerDTORequest:CustomerDTOBase
     {
-        
+
     }
 }

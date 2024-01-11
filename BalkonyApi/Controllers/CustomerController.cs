@@ -28,8 +28,9 @@ namespace BalkonyApi.Controllers
 
             Customer customer = _mapper.Map<Customer>(customerDTORequest);
 
-            CustomerDTOResponse customerDTOResponse=_mapper.Map< CustomerDTOResponse > (await _customerService.AddAsync(customer));
-
+            await _customerService.AddAsync(customer);
+            CustomerDTOResponse customerDTOResponse=_mapper.Map<CustomerDTOResponse>(customer);
+            
             return Ok(ApiResult<CustomerDTOResponse>.SuccesWithData(customerDTOResponse));
         }
 
@@ -47,7 +48,7 @@ namespace BalkonyApi.Controllers
         }
 
 
-        [HttpDelete("/DeleteCustomer/{id}")]
+        [HttpDelete("/DeleteCustomer/{customerId}")]
         public async Task<IActionResult> DeleteCustomer(long customerId)
         {
             var customer = await _customerService.GetAsync(x=>x.Id==customerId);
@@ -58,7 +59,7 @@ namespace BalkonyApi.Controllers
         }
 
 
-        [HttpGet("/Customers")]
+        [HttpGet("/Customers/{userId}")]
         public async Task<IActionResult> GetAllCustomer(long userId)
         {
             var customers = await _customerService.GetAllAsync(x=>x.UserId==userId);
