@@ -8,5 +8,6 @@ namespace BalkonyEntity.DTO.Stock
 {
     public class StockDTOResponse:StockDTOBase
     {
+        public string StockName { get; set; }   
     }
 }
