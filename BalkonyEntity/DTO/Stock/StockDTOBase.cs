@@ -8,6 +8,7 @@ namespace BalkonyEntity.DTO.Stock
 {
     public class StockDTOBase
     {
+        public long Id { get; set; }
         public long ProductId { get; set; }
         public long UserId { get; set; }
         public decimal? Quantity { get; set; }
