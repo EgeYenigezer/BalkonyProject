@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using BalkonyBusiness.Abstract;
+using BalkonyEntity.DTO.StockDetail;
+using BalkonyEntity.Poco;
+using BalkonyEntity.Result;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BalkonyApi.Controllers
 {
@@ -6,10 +11,23 @@ namespace BalkonyApi.Controllers
     [Route("[Action]")]
     public class StockDetailController : Controller
     {
-        [HttpPost("/AddStockDetail")]
-        public async Task<IActionResult> AddStockDetail()
+        private readonly IStockDetailService _stockDetailService;
+        private readonly IMapper _mapper;
+
+        public StockDetailController(IMapper mapper, IStockDetailService stockDetailService)
         {
-            return Ok();
+            _mapper = mapper;
+            _stockDetailService = stockDetailService;
+        }
+
+        [HttpPost("/AddStockDetail")]
+        public async Task<IActionResult> AddStockDetail(StockDetailDTORequest stockDetailDTORequest)
+        {
+            var stockDetail = _mapper.Map<StockDetail>(stockDetailDTORequest);
+            await _stockDetailService.AddAsync(stockDetail);
+            StockDetailDTOResponse stockDetailDTOResponse = new();
+            stockDetailDTOResponse = _mapper.Map<StockDetailDTOResponse>(stockDetailDTOResponse);
+            return Ok(ApiResult<StockDetailDTOResponse>.SuccesWithData(stockDetailDTOResponse));
         }
         
     }
