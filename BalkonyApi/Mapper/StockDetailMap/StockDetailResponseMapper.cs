@@ -8,8 +8,15 @@ namespace BalkonyApi.Mapper.StockDetailMap
     {
         public StockDetailResponseMapper()
         {
-            CreateMap<StockDetail,StockDetailDTOResponse>();
-            CreateMap<StockDetailDTOResponse, StockDetail>();
+            CreateMap<StockDetail, StockDetailDTOResponse>()
+                .ForMember(dest => dest.ProductName, opt =>
+                {
+                    opt.MapFrom(src => src.Product.Name);
+                }).
+                ForMember(dest => dest.SupplierName, opt =>
+                {
+                    opt.MapFrom(src => src.Supplier.Name);
+                }).ReverseMap();
         }
     }
 }
