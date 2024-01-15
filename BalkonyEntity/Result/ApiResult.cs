@@ -68,14 +68,18 @@ namespace BalkonyEntity.Result
             return new ApiResult<T>(message,statusCode,ErrorInformation.AuthenticationError());
         }
 
-        public static ApiResult<T> TokenError(string message,int statusCode = (int)HttpStatusCode.Unauthorized)
+        public static ApiResult<T> TokenValidationError()
         {
-            return new ApiResult<T>(message, statusCode, ErrorInformation.TokenError());
+            return new ApiResult<T>("Hata Oluştu",(int)HttpStatusCode.Unauthorized,ErrorInformation.TokenValidationError());
         }
 
-        public static ApiResult<T> TokenNotFoundError(string message,int statusCode = (int)HttpStatusCode.Unauthorized)
+        public static ApiResult<T> TokenNotFound()
         {
-            return new ApiResult<T>(message,statusCode,ErrorInformation.TokenNotFoundError());
+            return new ApiResult<T>("Hata Oluştu",(int)HttpStatusCode.Unauthorized,ErrorInformation.TokenNotFoundError());
+        }
+        public static ApiResult<T> Error()
+        {
+            return new ApiResult<T>("Bir Hata Oluştu, Daha Sonra Tekrar Deneyiniz!!",(int)HttpStatusCode.InternalServerError,ErrorInformation.GlobalError());
         }
     }
 }

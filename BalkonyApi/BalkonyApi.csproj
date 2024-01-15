@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -17,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BalkonyBusiness\BalkonyBusiness.csproj" />
     <ProjectReference Include="..\BalkonyDAL\BalkonyDAL.csproj" />
+    <ProjectReference Include="..\BalkonyHelper\BalkonyHelper.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,10 @@
+using BalkonyApi.Middleware;
 using BalkonyBusiness.Abstract;
 using BalkonyBusiness.Concrete;
 using BalkonyDAL.Abstract.DataManagement;
 using BalkonyDAL.Concrete.EntityFramework.Context;
 using BalkonyDAL.Concrete.EntityFramework.DataManagement;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,8 @@ builder.Services.AddScoped<IStockService,StockManager >();
 builder.Services.AddScoped<IStockDetailService,StockDetailManager >();
 builder.Services.AddScoped<ISupplierService,SupplierManager >();
 builder.Services.AddScoped<IUserService,UserManager >();
+builder.Services.AddFluentValidationAutoValidation();
+
 
 
 
@@ -37,6 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseGlobalExceptionMiddleware();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();

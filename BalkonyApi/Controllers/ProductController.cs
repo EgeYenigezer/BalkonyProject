@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BalkonyApi.Aspects;
+using BalkonyApi.Validation.FluentValidation;
 using BalkonyBusiness.Abstract;
 using BalkonyEntity.DTO.Product;
 using BalkonyEntity.Poco;
@@ -22,6 +24,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/AddProduct")]
+        [ValidationFilter(typeof(ProductValidator))]
         public async Task<IActionResult> AddProduct(ProductDTORequest productDTORequest)
         {
             Product product = _mapper.Map<Product>(productDTORequest);
@@ -34,6 +37,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/UpdateProduct")]
+        [ValidationFilter(typeof(ProductValidator))]
         public async Task<IActionResult> UpdateProduct(ProductDTORequest productDTORequest)
         {
             var product = await _productService.GetAsync(x => x.Id == productDTORequest.Id);

@@ -32,7 +32,7 @@ namespace BalkonyEntity.Result
             return new ErrorInformation { Error = error, ErrorDescription = errorDescription };
         }
 
-        public static ErrorInformation TokenError(object? error = null, string errorDescription = "Hatalı Token!!")
+        public static ErrorInformation TokenValidationError(object? error = null, string errorDescription = "Hatalı Token!!")
         {
             return new ErrorInformation { Error = error, ErrorDescription = errorDescription };
         }
