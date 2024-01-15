@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BalkonyApi.Aspects;
+using BalkonyApi.Validation.FluentValidation;
 using BalkonyBusiness.Abstract;
 using BalkonyEntity.DTO.User;
 using BalkonyEntity.Poco;
@@ -22,6 +24,7 @@ namespace BalkonyApi.Controllers
 
 
         [HttpPost("/AddUser")]
+        [ValidationFilter(typeof(UserValidator))]
         public async Task<IActionResult> AddUser(UserDTORequest userDTORequest)
         {
             User user = _mapper.Map<User>(userDTORequest);
@@ -34,6 +37,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/UpdateUser")]
+        [ValidationFilter(typeof(UserValidator))]
         public async Task<IActionResult> UpdateUser(UserDTORequest userDTORequest)
         {
             User user = await _userService.GetAsync(x => x.Id == userDTORequest.Id);

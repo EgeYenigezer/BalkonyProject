@@ -1,4 +1,6 @@
-﻿using BalkonyBusiness.Abstract;
+﻿using BalkonyApi.Aspects;
+using BalkonyApi.Validation.FluentValidation;
+using BalkonyBusiness.Abstract;
 using BalkonyEntity.DTO.Login;
 using BalkonyEntity.Result;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +27,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/Login")]
+        [ValidationFilter(typeof(LoginValidator))]
         public async Task<IActionResult> Login(LoginDTORequest loginDTORequest)
         {
             var user = await _userService.GetAsync(x=>x.Email==loginDTORequest.Email&x.Password==loginDTORequest.Password);

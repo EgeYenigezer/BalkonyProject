@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using BalkonyApi.Aspects;
+using BalkonyApi.Validation.FluentValidation;
 using BalkonyBusiness.Abstract;
 using BalkonyEntity.DTO.Supplier;
 using BalkonyEntity.Poco;
 using BalkonyEntity.Result;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace BalkonyApi.Controllers
 {
@@ -21,6 +24,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/AddSupplier")]
+        [ValidationFilter(typeof (SupplierValidator))]
         public async Task<IActionResult> AddSupplier(SupplierDTORequest supplierDTORequest)
         {
             Supplier supplier = new();
@@ -35,6 +39,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/UpdateSupplier")]
+        [ValidationFilter(typeof(SupplierValidator))]
         public async Task<IActionResult> UpdateSupplier(SupplierDTORequest supplierDTORequest)
         {
             var supplier = await _supplierService.GetAsync(x => x.Id == supplierDTORequest.Id);

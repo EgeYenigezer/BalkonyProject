@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BalkonyApi.Aspects;
+using BalkonyApi.Validation.FluentValidation;
 using BalkonyBusiness.Abstract;
 using BalkonyEntity.DTO.Customer;
 using BalkonyEntity.Poco;
@@ -23,6 +25,7 @@ namespace BalkonyApi.Controllers
 
 
         [HttpPost("/AddCustomer")]
+        [ValidationFilter(typeof(CustomerValidator))]
         public async Task<IActionResult> AddCustomer(CustomerDTORequest customerDTORequest)
         {
 
@@ -36,6 +39,7 @@ namespace BalkonyApi.Controllers
 
 
         [HttpPost("/UpdateCustomer")]
+        [ValidationFilter(typeof(CustomerValidator))]
         public async Task<IActionResult> UpdateCustomer(CustomerDTORequest customerDTORequest)
         {
             var customer = await _customerService.GetAsync(x=>x.Id== customerDTORequest.Id);

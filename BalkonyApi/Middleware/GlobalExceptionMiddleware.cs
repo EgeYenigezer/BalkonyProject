@@ -36,7 +36,6 @@ namespace BalkonyApi.Middleware
 
                     httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     httpContext.Response.ContentType = "application/json";
-                    //await httpContext.Response.WriteAsJsonAsync(ApiResult<FieldValidationException>.FieldValdationError(ErrorInformation.FieldValidationError(errors), new JsonSerializerOptions(){ PropertyNamingPolicy = null }));
                     await httpContext.Response.WriteAsJsonAsync(ApiResult<FieldValidationException>.FieldValdationError(errors), new JsonSerializerOptions()
                     {
                         PropertyNamingPolicy = null
