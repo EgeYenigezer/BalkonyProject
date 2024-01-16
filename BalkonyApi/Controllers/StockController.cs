@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BalkonyApi.Aspects;
+using BalkonyApi.Validation.FluentValidation;
 using BalkonyBusiness.Abstract;
 using BalkonyEntity.DTO.Stock;
 using BalkonyEntity.DTO.StockDetail;
@@ -22,6 +24,7 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpPost("/AddStock")]
+        [ValidationFilter(typeof(StockValidator))]
         public async Task<IActionResult> AddStock(StockDTORequest stockDTORequest)
         {
             Stock stock = _mapper.Map<Stock>(stockDTORequest);

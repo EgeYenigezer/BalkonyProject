@@ -11,6 +11,7 @@ namespace BalkonyEntity.DTO.Stock
         public long Id { get; set; }
         public long ProductId { get; set; }
         public long UserId { get; set; }
+        public string StockTitle { get; set; }
         public decimal? Quantity { get; set; }
         public string? QuantityUnit { get; set; }
     }
