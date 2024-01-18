@@ -28,6 +28,8 @@ builder.Services.AddScoped<IStockService,StockManager >();
 builder.Services.AddScoped<IStockDetailService,StockDetailManager >();
 builder.Services.AddScoped<ISupplierService,SupplierManager >();
 builder.Services.AddScoped<IUserService,UserManager >();
+builder.Services.AddScoped<IUnitService,UnitManager >();
+builder.Services.AddScoped<IProductUnitService,ProductUnitManager >();
 builder.Services.AddFluentValidationAutoValidation();
 
 

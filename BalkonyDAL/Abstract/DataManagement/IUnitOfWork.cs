@@ -15,6 +15,8 @@ namespace BalkonyDAL.Abstract.DataManagement
         IStockDetailRepository StockDetailRepository { get; }
         ISupplierRepository SupplierRepository { get; }
         IUserRepository UserRepository { get; }
+        IUnitRepository UnitRepository { get; }
+        IProductUnitRepository ProductUnitRepository { get; }
         Task<int> SaveChangeAsync();
     }
 }

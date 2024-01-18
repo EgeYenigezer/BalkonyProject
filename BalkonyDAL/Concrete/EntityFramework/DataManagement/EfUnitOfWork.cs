@@ -29,6 +29,8 @@ namespace BalkonyDAL.Concrete.EntityFramework.DataManagement
             StockDetailRepository = new EfStockDetailRepository(_context);
             SupplierRepository = new EfSupplierRepository(_context);
             UserRepository = new EfUserRepository(_context);
+            UnitRepository = new EfUnitRepository(_context);
+            ProductUnitRepository= new EfProductUnitRepository(_context);
         }
 
 
@@ -45,6 +47,8 @@ namespace BalkonyDAL.Concrete.EntityFramework.DataManagement
         public ISupplierRepository SupplierRepository { get; }
 
         public IUserRepository UserRepository { get; }
+        public IUnitRepository UnitRepository { get; }
+        public IProductUnitRepository ProductUnitRepository { get; }
 
         public async Task<int> SaveChangeAsync()
         {
