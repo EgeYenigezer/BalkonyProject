@@ -15,8 +15,12 @@ public partial class User:BaseEntity
     public string? Email { get; set; }
 
     public string? Password { get; set; }
+
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
     public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();
+
     public virtual ICollection<Supplier> Suppliers { get; set; } = new List<Supplier>();
 }
