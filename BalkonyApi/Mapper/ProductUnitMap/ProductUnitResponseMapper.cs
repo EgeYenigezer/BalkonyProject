@@ -8,8 +8,10 @@ namespace BalkonyApi.Mapper.ProductUnitMap
     {
         public ProductUnitResponseMapper()
         {
-            CreateMap<ProductUnit, ProductUnitDTOResponse>();
-            CreateMap<ProductUnitDTOResponse, ProductUnit>();
+            CreateMap<ProductUnit, ProductUnitDTOResponse>().ForMember(dest => dest.UnitName, opt =>
+            {
+                opt.MapFrom(src => src.Unit.UnitName);
+            }).ReverseMap();
         }
     }
 }

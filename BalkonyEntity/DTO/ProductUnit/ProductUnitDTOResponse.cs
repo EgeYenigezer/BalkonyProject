@@ -8,5 +8,6 @@ namespace BalkonyEntity.DTO.ProductUnit
 {
     public class ProductUnitDTOResponse:ProductUnitDTOBase
     {
+        public string UnitName { get; set; }
     }
 }

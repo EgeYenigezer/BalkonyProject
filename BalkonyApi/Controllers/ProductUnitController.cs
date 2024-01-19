@@ -53,10 +53,10 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<ProductUnitDTOResponse>.SuccesWithOutData());
         }
 
-        [HttpGet("/ProductUnits")]
-        public async Task<IActionResult> GetAllProductOfUnit()
+        [HttpGet("/ProductUnits/{productId}")]
+        public async Task<IActionResult> GetAllProductOfUnit(Int64 productId)
         {
-            var productUnits = await _productUnitService.GetAllAsync();
+            var productUnits = await _productUnitService.GetAllAsync(x=>x.ProductId== productId, "Unit","Product");
 
             List<ProductUnitDTOResponse> productUnitDTOResponses = new();
 
