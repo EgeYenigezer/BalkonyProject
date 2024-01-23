@@ -26,7 +26,7 @@ namespace BalkonyApi.Controllers
             var stockDetail = _mapper.Map<StockDetail>(stockDetailDTORequest);
             await _stockDetailService.AddAsync(stockDetail);
             StockDetailDTOResponse stockDetailDTOResponse = new();
-            stockDetailDTOResponse = _mapper.Map<StockDetailDTOResponse>(stockDetailDTOResponse);
+            stockDetailDTOResponse = _mapper.Map<StockDetailDTOResponse>(stockDetail);
             return Ok(ApiResult<StockDetailDTOResponse>.SuccesWithData(stockDetailDTOResponse));
         }
 
@@ -55,7 +55,7 @@ namespace BalkonyApi.Controllers
         [HttpGet("/StockDetails/{stockId}")]
         public async Task<IActionResult> GetAllStockDetail(long stockId)
         {
-            var stockDetails = await _stockDetailService.GetAllAsync(x=>x.StockId==stockId,"Supplier","Product");
+            var stockDetails = await _stockDetailService.GetAllAsync(x=>x.StockId==stockId,"Supplier","Stock.Product");
 
             List<StockDetailDTOResponse> stockDetailDTOResponses = new();
 
@@ -70,7 +70,7 @@ namespace BalkonyApi.Controllers
         [HttpGet("/GetStockDetail/{stockDetailId}")]
         public async Task<IActionResult> GetStockDetail(long stockDetailId)
         {
-            var stockDetail = await _stockDetailService.GetAsync(x=>x.Id==stockDetailId,"Supplier","Product");
+            var stockDetail = await _stockDetailService.GetAsync(x=>x.Id==stockDetailId,"Supplier","Stock.Product");
 
             StockDetailDTOResponse stockDetailDTOResponse = _mapper.Map<StockDetailDTOResponse>(stockDetail);
             return Ok(ApiResult<StockDetailDTOResponse>.SuccesWithData(stockDetailDTOResponse));

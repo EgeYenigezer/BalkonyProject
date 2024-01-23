@@ -8,7 +8,7 @@ namespace BalkonyApi.Mapper.ProductMap
     {
         public ProductResponseMapper()
         {
-            CreateMap<Product,ProductDTOResponse>();
+            CreateMap<Product, ProductDTOResponse>();
             CreateMap<ProductDTOResponse, Product>();
         }
     }
