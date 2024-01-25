@@ -5,6 +5,7 @@ using BalkonyDAL.Abstract.DataManagement;
 using BalkonyDAL.Concrete.EntityFramework.Context;
 using BalkonyDAL.Concrete.EntityFramework.DataManagement;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddDbContext<BalconyDbContext>();
+builder.Services.AddDbContext<BalconyDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("BalkonyString"));
+});
 builder.Services.AddScoped<IUnitOfWork,EfUnitOfWork >();
 builder.Services.AddScoped<ICustomerService,CustomerManager >();
 builder.Services.AddScoped<IOrderService,OrderManager >();
