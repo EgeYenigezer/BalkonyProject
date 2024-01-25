@@ -34,7 +34,7 @@ namespace BalkonyApi.Controllers
         [HttpPost("/UpdateProductUnit")]
         public async Task<IActionResult> UpdateProductUnit(ProductUnitDTORequest productUnitDTORequest)
         {
-            var productUnit = await _productUnitService.GetAsync(x=>x.Id==productUnitDTORequest.Id);
+            var productUnit = await _productUnitService.GetAsync(x=>x.ProductId==productUnitDTORequest.ProductId&&x.UnitId==productUnitDTORequest.UnitId);
 
             productUnit = _mapper.Map(productUnitDTORequest, productUnit);
 
@@ -44,9 +44,9 @@ namespace BalkonyApi.Controllers
         }
 
         [HttpDelete("/DeleteProductUnit/{productUnitId}")]
-        public async Task<IActionResult> DeleteProductUnit(Int64 productUnitId)
+        public async Task<IActionResult> DeleteProductUnit(Int64 productId,Int64 unitId)
         {
-            var productUnit = await _productUnitService.GetAsync(x=>x.Id==productUnitId);
+            var productUnit = await _productUnitService.GetAsync(x=>x.ProductId == productId&&x.UnitId== unitId);
 
             await _productUnitService.DeleteAsync(productUnit);
 
