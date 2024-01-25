@@ -57,7 +57,7 @@ namespace BalkonyApi.Controllers
         [HttpGet("/Orders/{userId}")]
         public async Task<IActionResult> GetAllOrder(long userId)
         {
-            var orders = await _orderService.GetAllAsync(x=>x.UserId==userId);
+            var orders = await _orderService.GetAllAsync(x=>x.UserId==userId && x.IsActive==true);
 
             List<OrderDTOResponse> orderDTOResponses = new();
 
@@ -77,6 +77,23 @@ namespace BalkonyApi.Controllers
             OrderDTOResponse orderDTOResponse = _mapper.Map<OrderDTOResponse>(order);
             return Ok(ApiResult<OrderDTOResponse>.SuccesWithData(orderDTOResponse));
         }
-        
+
+
+        //isActive false getirme
+
+        [HttpGet("/NoActiveOrders/{userId}")]
+        public async Task<IActionResult> GetAllNoActiveOrder(long userId)
+        {
+            var orders = await _orderService.GetAllAsync(x => x.UserId == userId && x.IsActive == false);
+
+            List<OrderDTOResponse> orderDTOResponses = new();
+
+            foreach (var order in orders)
+            {
+                orderDTOResponses.Add(_mapper.Map<OrderDTOResponse>(order));
+            }
+
+            return Ok(ApiResult<List<OrderDTOResponse>>.SuccesWithData(orderDTOResponses));
+        }
     }
 }

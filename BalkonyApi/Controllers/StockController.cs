@@ -66,7 +66,7 @@ namespace BalkonyApi.Controllers
         [HttpGet("/GetStock/{stockId}")]
         public async Task<IActionResult> GetStock(long stockId)
         {
-            var stock = await _stockService.GetAsync(x=>x.Id == stockId);
+            var stock = await _stockService.GetAsync(x=>x.Id == stockId, "Product");
             StockDTOResponse stockDTOResponse = _mapper.Map<StockDTOResponse>(stock);
             return Ok(ApiResult<StockDTOResponse>.SuccesWithData(stockDTOResponse));
         }

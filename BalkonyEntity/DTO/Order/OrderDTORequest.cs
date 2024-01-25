@@ -8,5 +8,6 @@ namespace BalkonyEntity.DTO.Order
 {
     public class OrderDTORequest:OrderDTOBase
     {
+        public bool isActive { get; set; }
     }
 }
