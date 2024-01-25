@@ -43,7 +43,7 @@ namespace BalkonyApi.Controllers
             return Ok(ApiResult<ProductUnitDTOResponse>.SuccesWithOutData());
         }
 
-        [HttpDelete("/DeleteProductUnit/{productUnitId}")]
+        [HttpDelete("/DeleteProductUnit")]
         public async Task<IActionResult> DeleteProductUnit(Int64 productId,Int64 unitId)
         {
             var productUnit = await _productUnitService.GetAsync(x=>x.ProductId == productId&&x.UnitId== unitId);
