@@ -65,6 +65,16 @@ namespace BalkonyApi.Middleware
                     });
 
                 }
+                else if (e.GetType()==typeof(TokenNotFoundException))
+                {
+                    var message = e.Data["TokenNotFoundMessage"];
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    httpContext.Response.ContentType = "application/json";
+                    await httpContext.Response.WriteAsJsonAsync(ApiResult<TokenNotFoundException>.TokenNotFound(),new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = null
+                    });
+                }
                 else
                 {
                     httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

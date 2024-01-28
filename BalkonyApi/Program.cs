@@ -4,7 +4,9 @@ using BalkonyBusiness.Concrete;
 using BalkonyDAL.Abstract.DataManagement;
 using BalkonyDAL.Concrete.EntityFramework.Context;
 using BalkonyDAL.Concrete.EntityFramework.DataManagement;
+using BalkonyHelper.Globals;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,21 +37,30 @@ builder.Services.AddScoped<IUserService,UserManager >();
 builder.Services.AddScoped<IUnitService,UnitManager >();
 builder.Services.AddScoped<IProductUnitService,ProductUnitManager >();
 builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+builder.Services.Configure<JWTExceptURLList>(builder.Configuration.GetSection(nameof(JWTExceptURLList)));
+//builder.Services.AddAuthorization(opt =>
+//{
+    //opt.AddPolicy("User", policy => policy.RequireRole("User"));
+//});
 
 
 
 
 var app = builder.Build();
-
+app.UseGlobalExceptionMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseGlobalExceptionMiddleware();
+
 app.UseSwagger();
 app.UseSwaggerUI();
+
+
+app.UseApiAuthorizationMiddlerware();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -26,8 +26,8 @@ namespace BalkonyApi.Controllers
             _userService = userService;
         }
 
-        [HttpPost("/Login")]
         [ValidationFilter(typeof(LoginValidator))]
+        [HttpPost("/Login")]
         public async Task<IActionResult> Login(LoginDTORequest loginDTORequest)
         {
             var user = await _userService.GetAsync(x=>x.Email==loginDTORequest.Email&x.Password==loginDTORequest.Password);
@@ -50,8 +50,7 @@ namespace BalkonyApi.Controllers
                     expires:DateTime.Now.AddDays(1),
                     claims:claims,
                     issuer:"http://egeyenigezer.com",
-                    signingCredentials:new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature)
-                    );
+                    signingCredentials:new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature));
                 var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
                 LoginDTOResponse loginDTOResponse = new();
