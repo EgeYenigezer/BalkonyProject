@@ -75,6 +75,15 @@ namespace BalkonyApi.Middleware
                         PropertyNamingPolicy = null
                     });
                 }
+                else if (e.GetType() == typeof(TokenException))
+                {
+                    httpContext.Response.StatusCode= (int)HttpStatusCode.Unauthorized;
+                    httpContext.Response.ContentType = "application/json";
+                    await httpContext.Response.WriteAsJsonAsync(ApiResult<TokenException>.TokenValidationError(), new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = null
+                    });
+                }
                 else
                 {
                     httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

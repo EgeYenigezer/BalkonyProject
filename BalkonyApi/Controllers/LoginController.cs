@@ -47,7 +47,7 @@ namespace BalkonyApi.Controllers
 
                 var jwt = new JwtSecurityToken(
                     
-                    expires:DateTime.Now.AddDays(1),
+                    expires:DateTime.Now.AddMinutes(1),
                     claims:claims,
                     issuer:"http://egeyenigezer.com",
                     signingCredentials:new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature));
