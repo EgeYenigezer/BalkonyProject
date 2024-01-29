@@ -70,7 +70,7 @@ namespace BalkonyEntity.Result
 
         public static ApiResult<T> TokenValidationError()
         {
-            return new ApiResult<T>("Hata Oluştu",(int)HttpStatusCode.Unauthorized,ErrorInformation.TokenValidationError());
+            return new ApiResult<T>("Token Doğrulama Hatası!",(int)HttpStatusCode.Unauthorized,ErrorInformation.TokenValidationError());
         }
 
         public static ApiResult<T> TokenNotFound()
