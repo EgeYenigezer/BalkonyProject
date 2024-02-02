@@ -47,7 +47,7 @@ namespace BalkonyApi.Middleware
 
                     var jwtToken = (JwtSecurityToken)validatedToken;
 
-                    if (validatedToken.ValidTo<DateTime.Now)
+                    if (jwtToken.ValidTo<DateTime.UtcNow)
                     {
                         throw new TokenException();
                     }

@@ -26,22 +26,23 @@ builder.Services.AddDbContext<BalconyDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("BalkonyString"));
 });
-builder.Services.AddScoped<IUnitOfWork,EfUnitOfWork >();
-builder.Services.AddScoped<ICustomerService,CustomerManager >();
-builder.Services.AddScoped<IOrderService,OrderManager >();
-builder.Services.AddScoped<IProductService,ProductManager >();
-builder.Services.AddScoped<IStockService,StockManager >();
-builder.Services.AddScoped<IStockDetailService,StockDetailManager >();
-builder.Services.AddScoped<ISupplierService,SupplierManager >();
-builder.Services.AddScoped<IUserService,UserManager >();
-builder.Services.AddScoped<IUnitService,UnitManager >();
-builder.Services.AddScoped<IProductUnitService,ProductUnitManager >();
+builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+builder.Services.AddScoped<ICustomerService, CustomerManager>();
+builder.Services.AddScoped<IOrderService, OrderManager>();
+builder.Services.AddScoped<IProductService, ProductManager>();
+builder.Services.AddScoped<IStockService, StockManager>();
+builder.Services.AddScoped<IStockDetailService, StockDetailManager>();
+builder.Services.AddScoped<ISupplierService, SupplierManager>();
+builder.Services.AddScoped<IUserService, UserManager>();
+builder.Services.AddScoped<IUnitService, UnitManager>();
+builder.Services.AddScoped<IProductUnitService, ProductUnitManager>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.Configure<JWTExceptURLList>(builder.Configuration.GetSection(nameof(JWTExceptURLList)));
 //builder.Services.AddAuthorization(opt =>
 //{
-    //opt.AddPolicy("User", policy => policy.RequireRole("User"));
+//    opt.AddPolicy("Admin", policy => policy.RequireRole());
+
 //});
 
 

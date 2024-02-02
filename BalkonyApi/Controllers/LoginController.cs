@@ -30,11 +30,11 @@ namespace BalkonyApi.Controllers
         [HttpPost("/Login")]
         public async Task<IActionResult> Login(LoginDTORequest loginDTORequest)
         {
-            var user = await _userService.GetAsync(x=>x.Email==loginDTORequest.Email&x.Password==loginDTORequest.Password);
+            var user = await _userService.GetAsync(x => x.Email == loginDTORequest.Email & x.Password == loginDTORequest.Password);
 
-            if (user==null)
+            if (user == null)
             {
-                
+
                 return NotFound(ApiResult<LoginDTORequest>.AuthenticationError("Kullanıcı Adı veya Şifre yanlış!!"));
             }
             else
@@ -46,24 +46,24 @@ namespace BalkonyApi.Controllers
                 claims.Add(new Claim("Password", user.Password));
 
                 var jwt = new JwtSecurityToken(
-                    
-                    expires:DateTime.Now.AddMinutes(5),
-                    claims:claims,
-                    issuer:"http://egeyenigezer.com",
-                    signingCredentials:new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature));
+
+                    expires: DateTime.Now.AddMinutes(60),
+                    claims: claims,
+                    issuer: "http://egeyenigezer.com",
+                    signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature));
                 var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
                 LoginDTOResponse loginDTOResponse = new();
 
                 loginDTOResponse.Id = user.Id;
-                loginDTOResponse.Name=user.Name;
+                loginDTOResponse.Name = user.Name;
                 loginDTOResponse.Token = token;
 
                 return Ok(ApiResult<LoginDTOResponse>.SuccesWithData(loginDTOResponse));
             }
 
-            
+
         }
-        
+
     }
 }
