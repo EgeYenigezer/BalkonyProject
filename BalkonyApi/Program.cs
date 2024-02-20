@@ -1,5 +1,6 @@
 using BalkonyApi.Middleware;
 using BalkonyBusiness.Abstract;
+using BalkonyBusiness.Cache;
 using BalkonyBusiness.Concrete;
 using BalkonyDAL.Abstract.DataManagement;
 using BalkonyDAL.Concrete.EntityFramework.Context;
@@ -37,10 +38,13 @@ builder.Services.AddScoped<ISupplierService, SupplierManager>();
 builder.Services.AddScoped<IUserService, UserManager>();
 builder.Services.AddScoped<IUnitService, UnitManager>();
 builder.Services.AddScoped<IProductUnitService, ProductUnitManager>();
+//==================================================================================================\\
 builder.Services.AddFluentValidationAutoValidation(); 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.Configure<JWTExceptURLList>(builder.Configuration.GetSection(nameof(JWTExceptURLList)));//JWT URL List Config
-builder.Services.AddScoped<IMemoryCache, MemoryCache>();//CACHE
+//builder.Services.AddScoped<IMemoryCache, MemoryCache>();//CACHE
+builder.Services.AddScoped<ICacheService, CacheManager>();
+builder.Services.AddMemoryCache();//Cache => like AddScoped<>
 //builder.Services.AddAuthorization(opt =>
 //{
 //    opt.AddPolicy("Admin", policy => policy.RequireRole());

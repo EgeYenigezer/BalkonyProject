@@ -64,6 +64,7 @@ namespace BalkonyApi.Controllers
 
 
         [HttpGet("/Users")]
+        [CacheAspect(60)]
         public async Task<IActionResult> Users()
         {
             var Users = await _userService.GetAllAsync();

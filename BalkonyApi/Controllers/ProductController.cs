@@ -2,11 +2,13 @@
 using BalkonyApi.Aspects;
 using BalkonyApi.Validation.FluentValidation;
 using BalkonyBusiness.Abstract;
+using BalkonyBusiness.Cache;
 using BalkonyEntity.DTO.Product;
 using BalkonyEntity.Poco;
 using BalkonyEntity.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 
 namespace BalkonyApi.Controllers
@@ -17,11 +19,15 @@ namespace BalkonyApi.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        private readonly ICacheService _cacheService;
+        private readonly IMemoryCache _memoryCache;
 
-        public ProductController(IProductService productService, IMapper mapper)
+        public ProductController(IProductService productService, IMapper mapper, ICacheService cacheService, IMemoryCache memoryCache)
         {
             _productService = productService;
             _mapper = mapper;
+            _cacheService = cacheService;
+            _memoryCache = memoryCache;
         }
 
         [HttpPost("/AddProduct")]
@@ -63,6 +69,7 @@ namespace BalkonyApi.Controllers
 
 
         [HttpGet("/Products")]
+        [CacheAspect(60)]
         public async Task<IActionResult> Products()
         {
             var Products = await _productService.GetAllAsync();
